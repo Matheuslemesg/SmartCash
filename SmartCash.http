@@ -1,0 +1,6 @@
+@SmartCash_HostAddress = http://localhost:5151
+
+GET {{SmartCash_HostAddress}}/smartcash/
+Accept: application/json
+
+###
