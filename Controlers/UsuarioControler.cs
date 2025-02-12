@@ -12,7 +12,7 @@ namespace SmartCash.ApiController
         
     [ApiController]
     [Route("[controller]")]
-    public class SmartCash(ApplicationDbContext context) : ControllerBase 
+    public class Usuarios(ApplicationDbContext context) : ControllerBase 
     {
         public readonly ApplicationDbContext _context = context;
 
@@ -20,6 +20,13 @@ namespace SmartCash.ApiController
         public async Task<List<Usuario>> Get()
         {
             return await _context.Usuarios.ToListAsync();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Usuario>> Get(long id)
+        {
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(usuario => usuario.Id == id);
+            return Ok(usuario);
         }
 
         [HttpPost]
@@ -56,7 +63,7 @@ namespace SmartCash.ApiController
                 _context.Usuarios.Remove(deleteUsuario);
                 await _context.SaveChangesAsync();
 
-                return Ok(usuario);
+                return Ok("Usuário excluido com sucesso!");
             }
         }
     }
