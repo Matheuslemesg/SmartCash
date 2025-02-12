@@ -22,7 +22,7 @@ namespace SmartCash.ApiController
             return await _context.Categorias.ToListAsync();
         }
 
-        [HttpGet]
+        [HttpGet("{descricao}")]
         public async Task<ActionResult<Categoria>> Get(string descricao)
         {
             var categoria = await _context.Categorias.FirstOrDefaultAsync(categoria => categoria.Descricao == descricao);
